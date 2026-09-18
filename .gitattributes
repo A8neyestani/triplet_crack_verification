@@ -1,0 +1,5 @@
+*.keras filter=lfs diff=lfs merge=lfs -text
+*.weights.h5 filter=lfs diff=lfs merge=lfs -text
+data/triplet_crack_dataset.zip filter=lfs diff=lfs merge=lfs -text
+artifacts/embedding6.keras filter=lfs diff=lfs merge=lfs -text
+artifacts/embedding6.weights.h5 filter=lfs diff=lfs merge=lfs -text

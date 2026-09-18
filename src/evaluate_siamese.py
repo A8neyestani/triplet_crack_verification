@@ -10,6 +10,7 @@ from typing import Dict, List
 
 import numpy as np
 import tensorflow as tf
+import keras
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, roc_auc_score
 
 from train_siamese import (
@@ -120,7 +121,7 @@ def main() -> None:
     test_triplets = split_triplets(triplets, seed=args.seed)["test"]
     config = TrainingConfig(image_size=IMAGE_SIZE, batch_size=args.batch_size, seed=args.seed)
     dataset = make_dataset(test_triplets, config, shuffle=False)
-    model = tf.keras.models.load_model(args.model, compile=False)
+    model = keras.models.load_model(args.model, compile=False)
     positive, negative = calculate_distances(model, dataset)
     metrics = evaluate_distances(positive, negative, args.threshold)
     write_outputs(positive, negative, metrics, args.output_dir)

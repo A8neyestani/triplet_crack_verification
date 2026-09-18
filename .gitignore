@@ -15,8 +15,7 @@ tmp/
 *.log
 outputs/
 
-# Large local research inputs/results are preserved locally but should not be
-# committed to a normal GitHub checkout.
-data/triplet_crack_dataset/
-artifacts/embedding6.keras
+# Large research inputs and model artifacts are stored with Git LFS.
+# Generated experiment outputs remain local unless explicitly selected.
 research/legacy/
+data/triplet_crack_dataset/

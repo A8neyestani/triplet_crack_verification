@@ -98,7 +98,21 @@ The reported configuration is:
 | Dense layers | 256, then 128 units; ReLU + batch normalization |
 | Embedding size | 128 |
 
-The local working copy is under [`data/triplet_crack_dataset`](data/triplet_crack_dataset). The dataset directory and the saved embedding model are kept locally and excluded from a normal GitHub checkout because of their size.
+The prepared dataset is included as
+[`data/triplet_crack_dataset.zip`](data/triplet_crack_dataset.zip) through Git
+LFS. It contains 20,000 anchor images and 20,000 generated positive
+counterparts. Extract it as described in [`data/README.md`](data/README.md).
+The source images come from the CC BY 4.0 dataset by Çağlar Fırat Özgenel; see
+[`data/README.md`](data/README.md) for the DOI, attribution, and reuse terms.
+
+The released embedding model and a matching HDF5 weights file are available in
+[`artifacts/`](artifacts). Install Git LFS before cloning so these large files
+are downloaded instead of the small pointer files:
+
+```bash
+git lfs install
+git clone https://github.com/A8neyestani/triplet_crack_verification.git
+```
 
 ## Code
 
@@ -141,6 +155,16 @@ Evaluate a saved embedding model:
 python src/evaluate_siamese.py \
   --model outputs/training_run/embedding.keras
 ```
+
+Evaluate the released model directly:
+
+```bash
+python src/evaluate_siamese.py \
+  --model artifacts/embedding6.keras \
+  --output-dir outputs/released_model_evaluation
+```
+
+The released model files are documented in [`artifacts/MODEL_CARD.md`](artifacts/MODEL_CARD.md).
 
 The original notebooks remain in [`research/notebooks_archive`](research/notebooks_archive) for provenance. They are not the primary execution path.
 
@@ -191,4 +215,7 @@ Arman Neyestani, Francesco Picariello, Ioan Tudosa, Pasquale Daponte, and Luca D
 
 The paper acknowledges partial support from the NATO Science for Peace and Security Programme Multi-Year Project G5924, “Inspection and security by Robots interacting with Infrastructure digital twins” (IRIS).
 
-The repository code is released under the MIT License. The paper and third-party dataset content retain their original rights and terms; see [`LICENSE`](LICENSE) for the repository-code license.
+The repository code is released under the MIT License. The released model is
+provided as a research artifact; the third-party dataset content remains under
+the source dataset's CC BY 4.0 terms. See [`LICENSE`](LICENSE),
+[`data/LICENSE`](data/LICENSE), and [`artifacts/MODEL_CARD.md`](artifacts/MODEL_CARD.md).
