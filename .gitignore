@@ -13,6 +13,7 @@ render_frames/
 tmp/
 *.mp4
 *.log
+outputs/
 
 # Large local research inputs/results are preserved locally but should not be
 # committed to a normal GitHub checkout.
