@@ -28,6 +28,46 @@ Anchor + Positive + Negative
 
 The training triplet contains an anchor image, a positive image with a similar crack pattern, and a negative image with a different pattern. The same encoder processes all three images. During inference, two images are encoded and compared using their embedding distance.
 
+## Visual Walkthrough
+
+The following scenes give a compact visual explanation of the method. They are explanatory illustrations of the pipeline; the monitoring scenes describe a possible use of the learned representation and are not additional experiments.
+
+### 1. From detection to verification
+
+![The same-crack question](assets/motion/01_problem.gif)
+
+![Crack verification framing](assets/motion/02_verification.gif)
+
+Two images of a concrete surface may differ because of camera position, orientation, illumination, or changes in appearance. The verification task is to decide whether they belong to the same crack pattern rather than simply detecting a crack in each image independently.
+
+### 2. Constructing the training triplet
+
+![Training with triplets](assets/motion/03_triplet_training.gif)
+
+![Shared feature encoder](assets/motion/04_shared_encoder.gif)
+
+The anchor is the reference image. The positive is a transformed version of the anchor in the training setup described in the paper, using operations such as rotation and shearing. The negative is an image of a different crack. All three inputs pass through the same encoder, so their embeddings are produced in a common feature space.
+
+### 3. Shaping the embedding space
+
+![Triplet loss](assets/motion/05_triplet_loss.gif)
+
+![Embedding space](assets/motion/06_embedding_space.gif)
+
+Triplet loss compares the anchor-positive and anchor-negative distances. Training reduces the distance to the positive and increases the distance to the negative until the margin constraint is satisfied. The result is an embedding space in which similar crack patterns should be closer together.
+
+### 4. Verification and the monitoring concept
+
+![Inference by comparing embeddings](assets/motion/07_inference.gif)
+
+![Verification result](assets/motion/08_verification_result.gif)
+
+![Monitoring concept](assets/motion/09_monitoring.gif)
+
+![Summary of the method](assets/motion/10_summary.gif)
+
+At inference time, the system encodes two images and compares their distance with a decision threshold. The final scenes connect this operation to repeated structural observations. That connection is a proposed monitoring direction, not a claim that longitudinal crack tracking was validated in the reported experiment.
+
 ## Network Architecture
 
 The model is a Siamese network with a shared ResNet-101 feature extractor. The paper describes a pre-trained ResNet-101 backbone followed by dense layers of 256 and 128 units, each with ReLU and batch normalization, and a final 128-dimensional embedding output.
