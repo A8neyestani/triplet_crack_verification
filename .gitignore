@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+.env
+.DS_Store
+Thumbs.db
+
+# Local render scratch space and optional video exports.
+render_frames/
+tmp/
+*.mp4
+*.log
+
+# Large local research inputs/results are preserved locally but should not be
+# committed to a normal GitHub checkout.
+data/triplet_crack_dataset/
+artifacts/embedding6.keras
+research/legacy/
